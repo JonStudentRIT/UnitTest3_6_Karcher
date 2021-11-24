@@ -46,11 +46,17 @@ namespace BTree
         public static List<BTree> treeToList = new List<BTree>();
         private void Button1_Click(object sender, EventArgs e)
         {
+            // first tree
             BTree rootOne = null;
+            // second tree
             BTree rootTwo = null;
+            // node reference
             BTree node;
+            // is this the first node
             bool firstNode = true;
+            // list of numbers provided
             int[] numberList = { 1, 5, 15, 20, 21, 22, 23, 24, 25, 30, 35, 37, 40, 55, 60 };
+            // add the list of numbers to the first tree
             for (int i = 0; i < numberList.Length; i++)
             {
                 node = new BTree(numberList[i], rootOne);
@@ -60,8 +66,10 @@ namespace BTree
                     firstNode = false;
                 }
             }
+            // traverse the tree assending
+            // the TraverseAscending will now also add a node to the treeToList
             BTree.TraverseAscending(rootOne);
-
+            // set the points of data for a balanced tree
             node = new BTree(24, rootTwo);
             rootTwo = node;
             rootTwo.isData = false;
@@ -69,6 +77,7 @@ namespace BTree
             node.isData = false;
             node = new BTree(37, rootTwo);
             node.isData = false;
+            // add the nodes in treeToList to the second tree
             foreach (BTree treeNode in treeToList)
             {
                 if ((int)treeNode.data != 24 &&
@@ -78,8 +87,9 @@ namespace BTree
                     node = new BTree(treeNode.data, rootTwo);
                 }
             }
+            // traverse the tree assending
             BTree.TraverseAscending(rootTwo);
-
+            // display the balanced tree
             VisualizeBinaryTree visualizeBinaryTree = new VisualizeBinaryTree(rootTwo);
         }
 
@@ -572,6 +582,7 @@ namespace BTree
                 {
                     // handle current node
                     form1.richTextBox1.Text += " " + node.data.ToString();
+                    // add the node to the tree to list
                     Form1.treeToList.Add(node);
                 }
 
